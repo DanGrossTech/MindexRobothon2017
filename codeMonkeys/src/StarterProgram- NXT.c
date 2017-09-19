@@ -32,6 +32,9 @@ void turn_left(int msec) {
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
+
+	debug_print("My name is Johnny Five");
+
 	wait1Msec(2000);						// Robot waits for 2000 milliseconds before executing program
 
 	// Turn Right at full power for 0.75 seconds

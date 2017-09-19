@@ -24,3 +24,7 @@ void stop_movement(int msec) {
 	motor[leftMotor] = 0;
 	wait1Msec(msec);
 }
+
+void debug_print(char * debug) {
+   writeDebugStream(debug);
+}

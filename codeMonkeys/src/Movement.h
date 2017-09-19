@@ -5,6 +5,11 @@ void stop_movement() {
 	motor[leftMotor] = 0;
 }
 
+void stop_movement(int msec) {
+//deprecated
+	stop_movement();
+}
+
 void turn_right(int degree) {
 	nMotorEncoderTarget[leftMotor] = degree*4;
 	motor[rightMotor] = 0;		    // Motor on motorB is stopped at 0 power

@@ -92,7 +92,7 @@ best_path(true);   // get out of box
 
 go_straight(FULL_SPEED, 700);
 
-turn_left(75);   // 90 degree turn to left
+turn_left(7);   // 90 degree turn to left
 
 forward_till_obs();
 
@@ -121,7 +121,8 @@ best_path(true);   // get out of box
 
 forward_till_obs();
 
-best_path(true);   // get out of box
+turn_right(75);   // 90 degree turn to left
+
 
 forward_till_obs();
 

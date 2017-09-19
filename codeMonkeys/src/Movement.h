@@ -27,16 +27,7 @@ void go_straight(int speed, int msec) {
 	motor[leftMotor] = speed;
 	wait1Msec(msec);
 }
-<<<<<<< HEAD
-=======
-
-void stop_movement(int msec) {
-	motor[rightMotor] = 0;
-	motor[leftMotor] = 0;
-	wait1Msec(msec);
-}
 
 void debug_print(char * debug) {
    writeDebugStream(debug);
 }
->>>>>>> 3dff63dc8571266c7bc6ad2a166d8dc7e1a547b4

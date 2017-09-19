@@ -16,30 +16,15 @@ Motor Port C        leftMotor           NXT Motor             Left side motor
 
 
 ----------------------------------------------------------------------------------------------------*/
-/*
-void turn_right(int msec) {
-	motor[rightMotor] = 0;		    // Motor on motorB is stopped at 0 power
-	motor[leftMotor]  = 100;			// Motor on motorC is run at full (100) power forward
-	wait1Msec(msec);					      // Robot runs previous code for 750 milliseconds before moving on
 
-}
-void turn_left(int msec) {
-  motor[rightMotor] = 100;		    // Motor on motorB is turned off
-	motor[leftMotor]  = 0;			  // Motor on motorC is turned off
-	wait1Msec(msec);					    // Robot stops for 1 second
-}
-*/
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
-<<<<<<< HEAD
 	// wait1Msec(2000);						// Robot waits for 2000 milliseconds before executing program
-=======
 
 	debug_print("My name is Johnny Five");
 
 	wait1Msec(2000);						// Robot waits for 2000 milliseconds before executing program
->>>>>>> 3dff63dc8571266c7bc6ad2a166d8dc7e1a547b4
 
 	// Turn Right at full power for 0.75 seconds
 

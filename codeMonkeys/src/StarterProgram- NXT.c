@@ -90,15 +90,52 @@ wait1Msec(800);
 
 best_path(true);   // get out of box
 
-go_straight(FULL_SPEED, 200);
+go_straight(FULL_SPEED, 700);
 
-best_path(false);   // get out of box
+turn_left(75);   // 90 degree turn to left
+
+forward_till_obs();
+
+best_path(true);   // right turn
+
+forward_till_obs();
+
+best_path(true);   // right turn
 
 forward_till_obs();
 
 best_path(false);   // get out of box
 
 forward_till_obs();
+
+best_path(false);   // get out of box
+
+forward_till_obs();
+
+
+best_path(true);   // get out of box
+
+forward_till_obs();
+
+best_path(true);   // get out of box
+
+forward_till_obs();
+
+best_path(true);   // get out of box
+
+forward_till_obs();
+
+best_path(false);   // get out of box
+
+forward_till_obs();
+
+best_path(false);   // get out of box
+
+forward_till_obs();
+
+
+
+
 
 
 

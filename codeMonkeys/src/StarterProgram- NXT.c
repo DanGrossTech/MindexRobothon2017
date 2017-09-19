@@ -18,46 +18,129 @@ Motor Port C        leftMotor           NXT Motor             Left side motor
 
 
 ----------------------------------------------------------------------------------------------------*/
-/*
-void turn_right(int msec) {
-	motor[rightMotor] = 0;		    // Motor on motorB is stopped at 0 power
-	motor[leftMotor]  = 100;			// Motor on motorC is run at full (100) power forward
-	wait1Msec(msec);					      // Robot runs previous code for 750 milliseconds before moving on
+
+/**
+point the bot
+*/
+void best_path(bool right) {
+	char str[80];
+	int distance = 0;
+	int last_distance = 0;
+	int degrees_turned = 0;
+	int slop = 10;
+	bool search = true;
+	while ( search ) {
+		last_distance = SensorValue[sonar];
+		if ( right ) {
+		turn_right(5);
+	} else {
+	  turn_left(5);
+	}
+		distance  = SensorValue[sonar];   // update to new distance from object
+		sprintf(str, "1sonar %d degrees %d distance %d %d\n", SensorValue[sonar], degrees_turned, distance, last_distance);
+			debug_print(str);
+			degrees_turned++;
+		if ( distance <= last_distance + slop ) {
+
+		}
+		else {
+			search = false;
+		}
+	}
 
 }
-void turn_left(int msec) {
-  motor[rightMotor] = 100;		    // Motor on motorB is turned off
-	motor[leftMotor]  = 0;			  // Motor on motorC is turned off
-	wait1Msec(msec);					    // Robot stops for 1 second
+
+void best_path2(bool right) {
+	char str[80];
+	int distance = 0;
+	int last_distance = 0;
+	int degrees_turned = 0;
+	int slop = 0;
+	bool search = true;
+	int i;
+	for (  i = 0; i < 90; i++ ) {
+		last_distance = SensorValue[sonar];
+		if ( right ) {
+			turn_right(5);
+			} else {
+			turn_left(5);
+		}
+
+		if ( SensorValue[sonar] > last_distance ) {
+			distance = SensorValue[sonar];
+			degrees_turned = i;
+		}
+		sprintf(str, "1sonar %d degrees %d distance %d %d\n", SensorValue[sonar], degrees_turned, distance, last_distance);
+		debug_print(str);
+	}
+
+		for (  i = 90; i > degrees; i-- ) {
+					sprintf(str, "1sonar %d degrees  %d %d\n", SensorValue[sonar], degrees, i);
+		debug_print(str);
+
+		if ( right ) {
+			back_left(5);
+			} else {
+			back_right(5);
+		}
+	}
+
+
 }
-*/
+
+void forward_till_obs() {
+	bool forward = true;
+		char str[80];
+int threshold = 15;
+	while (true)
+  {
+
+      if (SensorValue[sonar] >= threshold) {
+      	sprintf(str, "sensor %d greater\n ", SensorValue[sonar]);
+      	 debug_print(str);
+
+      	go_straight(FULL_SPEED, 1);
+      	stop_movement(2);
+    } else {
+       forward = false;
+     }
+
+    }
+}
+
+
 
 void detectwall () {
-char str[80];
+	bool step1 = false;
+	bool step2 = false;
+	bool step3= false;
+	char str[80];
 int threshold = 15;
+
+best_path(true);   // get out of box
+
+
+forward_till_obs();
+
+
+
+
  while (true)
   {
     //Make sure the value is not an error.
     {
-      if (SensorValue[sonar] > threshold) {
+      if (SensorValue[sonar] >= threshold) {
       	sprintf(str, "sensor %d greater\n ", SensorValue[sonar]);
+      	 debug_print(str);
 
       	go_straight(FULL_SPEED, 1);
-      	stop_movement(2);
-
-
-        debug_print(str);
-      } else if (SensorValue[sonar] == threshold) {
-      	sprintf(str, "sensor %d equals \n", SensorValue[sonar]);
-        debug_print(str);
-        go_straight(FULL_SPEED, 1);
       	stop_movement(2);
 
       } else if (SensorValue[sonar] < threshold) {
           sprintf(str, "sensor %d less than \n", SensorValue[sonar]);
           debug_print(str);
-        	turn_right(2);
-          stop_movement(1);
+
+       best_path(false);
 
       } else {
         debug_print("unknown");
@@ -70,6 +153,7 @@ int threshold = 15;
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
+	// wait1Msec(2000);						// Robot waits for 2000 milliseconds before executing program
 
 	debug_print("My name is Johnny Five");
 
@@ -79,9 +163,13 @@ task main()
 
 	// Turn Right at full power for 0.75 seconds
 
-	turn_right(750);
+	turn_right(90);
 
-	turn_left(750);
+	wait1Msec(2000);
+
+	turn_left(180);
+
+	wait1Msec(2000);
 
 	go_straight(FULL_SPEED, 2000);
 

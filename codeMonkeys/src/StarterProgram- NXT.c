@@ -27,7 +27,7 @@ void best_path(bool right) {
 	int distance = 0;
 	int last_distance = 0;
 	int degrees_turned = 0;
-	int slop = 10;
+	int slop = 5;
 	bool search = true;
 	while ( search ) {
 		last_distance = SensorValue[sonar];
@@ -50,49 +50,13 @@ void best_path(bool right) {
 
 }
 
-void best_path2(bool right) {
-	char str[80];
-	int distance = 0;
-	int last_distance = 0;
-	int degrees_turned = 0;
-	int slop = 0;
-	bool search = true;
-	int i;
-	for (  i = 0; i < 90; i++ ) {
-		last_distance = SensorValue[sonar];
-		if ( right ) {
-			turn_right(5);
-			} else {
-			turn_left(5);
-		}
 
-		if ( SensorValue[sonar] > last_distance ) {
-			distance = SensorValue[sonar];
-			degrees_turned = i;
-		}
-		sprintf(str, "1sonar %d degrees %d distance %d %d\n", SensorValue[sonar], degrees_turned, distance, last_distance);
-		debug_print(str);
-	}
-
-		for (  i = 90; i > degrees; i-- ) {
-					sprintf(str, "1sonar %d degrees  %d %d\n", SensorValue[sonar], degrees, i);
-		debug_print(str);
-
-		if ( right ) {
-			back_left(5);
-			} else {
-			back_right(5);
-		}
-	}
-
-
-}
 
 void forward_till_obs() {
 	bool forward = true;
 		char str[80];
 int threshold = 15;
-	while (true)
+	while (forward)
   {
 
       if (SensorValue[sonar] >= threshold) {
@@ -117,8 +81,22 @@ void detectwall () {
 	char str[80];
 int threshold = 15;
 
+	sprintf(str, "go backwards\n ");
+      	 debug_print(str);
+
+motor[rightMotor] = -100;
+	motor[leftMotor] = -100;
+wait1Msec(800);
+
 best_path(true);   // get out of box
 
+go_straight(FULL_SPEED, 200);
+
+best_path(false);   // get out of box
+
+forward_till_obs();
+
+best_path(false);   // get out of box
 
 forward_till_obs();
 

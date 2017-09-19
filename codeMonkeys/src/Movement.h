@@ -46,6 +46,8 @@ void go_straight(int speed) {
 	motor[rightMotor] = speed;
 	motor[leftMotor] = speed;
 }
+
+
 void go_straight(int speed, int msec) {
 	go_straight(speed);
 	wait1Msec(msec);

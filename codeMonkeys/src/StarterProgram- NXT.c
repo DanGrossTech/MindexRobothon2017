@@ -32,13 +32,17 @@ void turn_left(int msec) {
 //+++++++++++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++++++++++++
 task main()
 {
-	wait1Msec(2000);						// Robot waits for 2000 milliseconds before executing program
+	// wait1Msec(2000);						// Robot waits for 2000 milliseconds before executing program
 
 	// Turn Right at full power for 0.75 seconds
 
-	turn_right(750);
+	turn_right(90);
 
-	turn_left(750);
+	wait1Msec(2000);
+
+	turn_left(180);
+
+	wait1Msec(2000);
 
 	go_straight(FULL_SPEED, 2000);
 
